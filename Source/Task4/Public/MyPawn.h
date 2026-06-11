@@ -28,8 +28,12 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Speed")
 	float NormalSpeed;
+
 	FVector2D MoveInput;
 	FVector2D LookInput;
+	
+	FVector CurrentLocation, MoveVector;
+	FVector ForwardVector, RightVector;
 
 protected:
 

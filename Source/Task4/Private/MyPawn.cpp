@@ -34,6 +34,7 @@ AMyPawn::AMyPawn()
 	CameraComponent->bUsePawnControlRotation = false;
 
 	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bStartWithTickEnabled = true;
 	NormalSpeed = 600.0f;
 
 }
@@ -70,24 +71,42 @@ void AMyPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 void AMyPawn::BeginPlay()
 {
+	Super::BeginPlay();
 }
 
 void AMyPawn::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	if (!LookInput.IsNearlyZero())
-	{
-		AddActorLocalRotation(FRotator(LookInput.Y, LookInput.X, 0.f));
+	CurrentLocation = GetActorLocation();
+	ForwardVector = GetActorForwardVector();
+	RightVector = GetActorRightVector();
 
-		LookInput = FVector2D::ZeroVector;
+	if (!MoveInput.IsNearlyZero())
+	{
+		MoveVector = (ForwardVector * MoveInput.X) + (RightVector * MoveInput.Y);
+		MoveVector.Z = 0.0f;
+		MoveVector.Normalize();
+		SetActorLocation(CurrentLocation + (MoveVector * NormalSpeed * DeltaTime));
+		MoveInput = FVector2D::ZeroVector;
 	}
+
+	if (!FMath::IsNearlyZero(LookInput.X))
+	{
+		AddActorLocalRotation(FRotator(0.0f, LookInput.X, 0.0f));
+	}
+	if (!FMath::IsNearlyZero(LookInput.Y))
+	{
+		SpringArmComponent->AddRelativeRotation(FRotator(-LookInput.Y, 0.0f, 0.0f));
+	}
+	LookInput = FVector2D::ZeroVector;
 }
 
 void AMyPawn::Move(const FInputActionValue& value)
 {
 	if (!Controller) return;
 	MoveInput = value.Get<FVector2D>();
+	
 }
 
 void AMyPawn::Look(const FInputActionValue& value)
