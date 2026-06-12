@@ -31,6 +31,7 @@ public:
 
 	FVector2D MoveInput;
 	FVector2D LookInput;
+	bool ChangeInput;
 	
 	FVector CurrentLocation, MoveVector;
 	FVector ForwardVector, RightVector;
