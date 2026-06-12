@@ -24,7 +24,7 @@ void AMyPlayerController::BeginPlay()
 		}
 	}
 
-	//플레이어 캐릭터 변경 (할 줄 몰라서 AI 도움 받음...)
+	//이 아래로 쭉 플레이어 캐릭터 변경 (할 줄 몰라서 AI 도움 받음...22)
 	if (FirstPawn)
 	{
 		Possess(FirstPawn);
@@ -39,7 +39,6 @@ void AMyPlayerController::SetupInputComponent()
 	{
 		if (ChangeAction)
 		{
-			// 스페이스바가 눌렸을 때(Started) SwitchPawn 함수를 호출하도록 바인딩
 			EnhancedInput->BindAction(ChangeAction, ETriggerEvent::Started, this, &AMyPlayerController::ChangePawn);
 		}
 	}

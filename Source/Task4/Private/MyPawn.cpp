@@ -36,7 +36,6 @@ AMyPawn::AMyPawn()
 	PrimaryActorTick.bCanEverTick = true;
 	PrimaryActorTick.bStartWithTickEnabled = true;
 	NormalSpeed = 600.0f;
-
 }
 
 void AMyPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)

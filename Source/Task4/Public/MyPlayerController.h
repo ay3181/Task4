@@ -25,6 +25,7 @@ public:
 	UInputAction* LookAction;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Input")
 	UInputAction* FlyAction;
+
 	//여기부터 플레이어 캐릭터 변경 (할 줄 몰라서 AI 도움 받음...)
 	UPROPERTY(EditAnywhere, Category = "Input")
 	UInputAction* ChangeAction;
