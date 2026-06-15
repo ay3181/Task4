@@ -6,8 +6,6 @@
 
 class UInputMappingContext;
 class UInputAction;
-class AMyPawn;
-class AHand;
 
 UCLASS()
 class TASK4_API AMyPlayerController : public APlayerController
@@ -32,9 +30,9 @@ public:
 
 	void ChangePawn();
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Possess")
-	AMyPawn* FirstPawn;
+	APawn* FirstPawn;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Possess")
-	AHand* SecondPawn;
+	APawn* SecondPawn;
 
 private:
 	virtual void BeginPlay() override;
